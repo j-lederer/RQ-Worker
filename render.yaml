@@ -1,10 +1,10 @@
 services:
-   - type: worker
+  - type: worker
     name: queue
     region: ohio
     env: python
     buildCommand: "pip install -r requirements.txt"
-    startCommand: ""rq worker --url $REDIS_URL amazon-returns-task-queue""
+    startCommand: "rq worker --url $REDIS_URL amazon-returns-task-queue"
     autoDeploy: false
     envVars:
       - key: CELERY_BROKER_URL
