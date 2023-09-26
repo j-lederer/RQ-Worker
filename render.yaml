@@ -1,0 +1,9 @@
+services:
+  - name: rq-worker
+    env: web
+    command: "rq worker --url redis://default:BeLV3gdkkauKNpGpBGkZ@containers-us-west-149.railway.app:7030 amazon-returns-task-queue"
+    envVars:
+      - key: REDIS_URL
+        fromDatabase:
+          name: my-redis-database
+          property: host
