@@ -1,9 +1,14 @@
 services:
-  - name: rq-worker
-    type: worker
-    command: "rq worker --url $REDIS_URL amazon-returns-task-queue"
+   - type: worker
+    name: queue
+    region: ohio
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "celery --app tasks worker --loglevel info --concurrency 4"
+    autoDeploy: false
     envVars:
-      - key: REDIS_URL
-        fromDatabase:
-          name: my-redis-database
-          property: host
+      - key: CELERY_BROKER_URL
+        fromService:
+          name: celery-redis
+          type: redis
+          property: connectionString
