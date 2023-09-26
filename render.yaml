@@ -1,9 +1,5 @@
 services:
-  - name: rq-worker
-    env: web
-    command: "rq worker --url $REDIS_URL amazon-returns-task-queue"
-    envVars:
-      - key: REDIS_URL
-        fromDatabase:
-          name: my-redis-database
-          property: host
+  - name: my-worker
+    type: worker
+    buildCommand: pip install -r requirements.txt
+    startCommand: python worker.py
