@@ -8,7 +8,3 @@ services:
     autoDeploy: false
     envVars:
       - key: CELERY_BROKER_URL
-        fromService:
-          name: celery-redis
-          type: redis
-          property: connectionString
